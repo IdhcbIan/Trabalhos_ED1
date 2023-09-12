@@ -2,7 +2,7 @@ print("Criando Vetores")
 
 with open("vetores.txt", "w") as V:
 
-    for n in range(0, 5):
+    for n in range(0, 7):
         V.write("// Base " + str(n) + " //--------------------------\n")
         V.write("{")
         for i in range(0, 10**n):
