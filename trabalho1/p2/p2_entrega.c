@@ -27,6 +27,7 @@ void vector_find(int size, int v[size], int find) {
     for(int i = 0; i < size; i++) {
         if (v[i] == find){
         did_y_find = true;
+        break;
         }
 
     }
