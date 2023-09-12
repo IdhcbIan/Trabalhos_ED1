@@ -15,7 +15,13 @@ https://www.canva.com/design/DAFuPa91rmA/EkUVBUKQLlfppRMUeayS7g/edit?utm_content
 ------------------------------------------------------------------------------
 -> Trabalho 1
   A fazer:
-   - Programa 1, Contar os tempos e fazer os graficos...
+   - Programa 1 (pronto)
+
+   - Programa 2
+
+   - Programa 3
+
+   - Programa 4
 
 
 
