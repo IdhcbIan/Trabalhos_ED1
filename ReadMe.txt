@@ -19,7 +19,7 @@ https://www.canva.com/design/DAFuPa91rmA/EkUVBUKQLlfppRMUeayS7g/edit?utm_content
 
    - Programa 2 - tempos(com medias...)
 
-   - Programa 3 - terminar codigo entrega, tempos
+   - Programa 3 - tempos
 
    - Programa 4 - fazer...
 

@@ -43,41 +43,22 @@ int binary_find(int size, int vector[size], int find){
 }
 
 
+// Defining the Vector
+int vector[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+
 int main() {
-    //Pegando tamanho
-    int size;
-    scanf("%d", &size);
-    
-    //Pegando vetor
-    int vector[size];
+    // Getting size of the vector
+    int size = sizeof(vector) / sizeof(vector[0]); 
 
-    for (int i = 0; i < size; i++) {
-        scanf("%d", &vector[i]);
-    }
-
-    
-    //Pegando numero de pesquisas
-    int searches;
-    scanf("%d", &searches);
-   
-
-    //Pegando pesquisas
+    // Reading the value to find
     int find;
-    int to_find[searches];
+    scanf("%d", &find);
 
-    
-    for(int i=0; i<searches; i++){
-        scanf("%d", &find);
-        to_find[i] = find;
-    }
 
 
     //Buscando a lista
-    for(int i=0; i<searches; i++){
-      binary_find(size, vector, to_find[i]);
-    }
-
-
+    binary_find(size, vector, find);
 
 
     return 0;
