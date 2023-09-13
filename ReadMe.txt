@@ -15,13 +15,13 @@ https://www.canva.com/design/DAFuPa91rmA/EkUVBUKQLlfppRMUeayS7g/edit?utm_content
 ------------------------------------------------------------------------------
 -> Trabalho 1
   A fazer:
-   - Programa 1 (pronto)
+   - Programa 1 - fazer parte para entrega
 
-   - Programa 2
+   - Programa 2 - tempos
 
-   - Programa 3
+   - Programa 3 - fazer...
 
-   - Programa 4
+   - Programa 4 - fazer...
 
 
 
