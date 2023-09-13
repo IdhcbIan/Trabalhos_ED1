@@ -15,11 +15,11 @@ https://www.canva.com/design/DAFuPa91rmA/EkUVBUKQLlfppRMUeayS7g/edit?utm_content
 ------------------------------------------------------------------------------
 -> Trabalho 1
   A fazer:
-   - Programa 1 - fazer parte para entrega
+   - Programa 1 - Refazer tempos, fazendo medias
 
-   - Programa 2 - tempos
+   - Programa 2 - tempos(com medias...)
 
-   - Programa 3 - fazer...
+   - Programa 3 - terminar codigo entrega, tempos
 
    - Programa 4 - fazer...
 
