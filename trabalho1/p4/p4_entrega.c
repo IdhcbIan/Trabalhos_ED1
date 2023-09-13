@@ -18,28 +18,21 @@ void vector_print(int size, int v[size]) {
     printf("\n");
 }
 
+int recursive_find(int low, int high, int size, int vector[size], int find){
 
-//Criando uma funcao que busca o vetor //-----------
-int recursive_find(int size, int vector[size], int find){
-  int low = 0;
-  int high = size -1; //Index do ultimo
-  bool found = false; 
-
-  while (low<=high) {
-    int mid = (low+high) / 2;
-    if (vector[mid] == find){
-      printf("%d\n", mid);
-      found = true;
-      break;
-    }else if (vector[mid]<find) {
-      low = mid + 1;
-    }else{
-      high = mid -1;
+    if (low > high) { 
+        return -1;
     }
-  }
-  if (found == false){
-    printf("-1\n");
-  }
+
+    int mid = (low+high) / 2;
+
+    if (vector[mid] == find){
+        return mid;
+    } else if (vector[mid] < find) {
+        return recursive_find(mid + 1, high, size, vector, find);
+    } else {
+        return recursive_find(low, mid - 1, size, vector, find);
+    }
 }
 
 
@@ -65,6 +58,8 @@ int main() {
     int find;
     int to_find[searches];
 
+    int low = 0;
+    int high = size -1; //Index do ultimo
     
     for(int i=0; i<searches; i++){
         scanf("%d", &find);
@@ -74,9 +69,8 @@ int main() {
 
     //Buscando a lista
     for(int i=0; i<searches; i++){
-      recursive_find_find(size, vector, to_find[i]);
+      printf("%d\n", recursive_find(low, high, size, vector, to_find[i]));
     }
-
 
 
 
