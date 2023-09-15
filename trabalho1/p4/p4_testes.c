@@ -36,7 +36,8 @@ int recursive_find(int low, int high, int size, int vector[size], int find){
 }
 
 // Defining the Vector
-int vector[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+int vector[1000000] = {1,2,3,4,5,6,7,8,9}
+
 
 int main() {
     // Getting size of the vector
@@ -44,12 +45,11 @@ int main() {
     
 
     //Pegando pesquisas
-    int find;
+    int find = 999991;
 
     int low = 0;
     int high = size -1; //Index do ultimo
     
-    scanf("%d", &find);
 
 
     //Buscando a lista
