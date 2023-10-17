@@ -39,13 +39,17 @@ int recursive_find(int low, int high, int size, int vector[size], int find){
 int vector[10] = {0,1,2,3,4,5,6,7,8,9};
 
 
+
+
+
+
 int main() {
     // Getting size of the vector
     int size = sizeof(vector) / sizeof(vector[0]); 
     
 
     //Pegando pesquisas
-    int find = 999991;
+    int find = vector[2*(size/3)+1];
 
     int low = 0;
     int high = size -1; //Index do ultimo
