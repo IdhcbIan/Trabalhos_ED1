@@ -72,13 +72,55 @@ void add(char num[], List* L) {
 //-------Funcao Main------------------------------
 
 int main(){
-  List* L = create_list();
-  char num[] = "22222222222222222222222222222222";
-  add(num, L);
-  display_element(L);
+  List* N1 = create_list();
+  List* N2 = create_list();
 
+  char inp[10];
+
+  int i = 0;
+  char c = 'u';
+  while(c!=' '){
+    scanf("%c", &c);
+    if (c == ' ')  
+        break;
+    inp[i] = c;
+    i++;
+  }
+
+
+  c = 'u';
+  while(c != ' '){
+    scanf("%c", &c);
+    if (c == ' ')  
+        break;
+    add_node(N1, c - '0');
+  }
+
+  c = 'u';
+  while(c != '\n'){
+    scanf("%c", &c);
+    if (c == '\n')  
+        break;
+    add_node(N2, c - '0');
+  }
+  
+
+  printf("O Primeiro Numero eh: ");
+  display_list_reverse(N1);
+
+  printf("O Segundo Numero eh: ");
+  display_list_reverse(N2);
+
+  if (strcmp(inp, "soma") == 0){
+    printf("A soma dos numeros eh: ");
+    display_list_reverse(soma(N1, N2));
+  }
   return 0;
 }
+
+
+
+
 
 
 

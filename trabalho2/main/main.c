@@ -182,7 +182,6 @@ int main(){
     i++;
   }
 
-  printf("A soma eh %s\n", inp);
 
   c = 'u';
   while(c != ' '){

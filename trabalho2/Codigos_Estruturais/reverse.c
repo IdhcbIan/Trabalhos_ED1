@@ -72,6 +72,28 @@ void display_list_reverse(List* L) {
 }
 
 
+List* invert_list(List* N1) {
+    Node* prev = NULL;
+    Node* current = N1->front;
+    Node* next = NULL;
+
+    while (current != NULL) {
+        // Store the next node
+        next = current->next;
+
+        // Reverse the current node's pointer
+        current->next = prev;
+
+        // Move pointers for the next iteration
+        prev = current;
+        current = next;
+    }
+
+    // Update the front of the list
+    N1->front = prev;
+
+    return N1;
+}
 
 //------------Problemas -------------------------------------------------
 // Como o Maximo que dois digitos pode ser eh 9
@@ -81,19 +103,51 @@ void display_list_reverse(List* L) {
 
 int main(){
   List* N1 = create_list();
-  char num1[] = "123456";
-  add(N1, num1);
+  List* N2 = create_list();
+
+  char inp[10];
+
+  int i = 0;
+  char c = 'u';
+  while(c!=' '){
+    scanf("%c", &c);
+    if (c == ' ')  
+        break;
+    inp[i] = c;
+    i++;
+  }
+
+
+  c = 'u';
+  while(c != ' '){
+    scanf("%c", &c);
+    if (c == ' ')  
+        break;
+    add_node(N1, c - '0');
+  }
+
+  c = 'u';
+  while(c != '\n'){
+    scanf("%c", &c);
+    if (c == '\n')  
+        break;
+    add_node(N2, c - '0');
+  }
+  
+
   printf("O Primeiro Numero eh: ");
   display_list_reverse(N1);
 
-
-  List* N2 = create_list();
-  char num2[] = "123456";
-  add(N2, num2);
   printf("O Segundo Numero eh: ");
   display_list_reverse(N2);
 
-
-
   return 0;
 }
+
+
+
+
+
+
+
+
