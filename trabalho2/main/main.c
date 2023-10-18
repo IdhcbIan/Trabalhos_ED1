@@ -46,8 +46,26 @@ void add_node(List* L, int value){
   }
 }
 
+void display_element(List* L){
+  Node* current = L->front; 
+  int i = 0;
+  while (current){
+    printf("%d", current->data);
+    current = current->next;
+    i++;
+  }
+}
 
-void add(List* L, char num[]) {  
+void add_linear(char num[], List* L) {  
+    int length = strlen(num);
+
+    for(int i = 0; i < length; i++) {
+        char c = num[i];  
+        add_node(L, c - '0'); 
+    }
+}
+
+void add_reverse(List* L, char num[]) {  
     int length = strlen(num);
 
     for(int i = length - 1; i >= 0; i--) {  
@@ -70,7 +88,6 @@ void display_list_reverse(List* L) {
     display_element_reverse(L->front);
     printf("\n");
 }
-
 
 List* invert_list(List* N1) {
     Node* prev = NULL;
@@ -95,13 +112,16 @@ List* invert_list(List* N1) {
     return N1;
 }
 
-//------------Problemas -------------------------------------------------
-// Como o Maximo que dois digitos pode ser eh 9
-// Podemos considerar que toda vez que a soma de um dos nodes tenha 2 digitos, ent o digito da frente sera "1"
+//-------Problemas -------------------------------
 
+
+//++++++++++++++Soma +++++++++++++
 List* soma(List* N1, List* N2){
   List* Nf = create_list();
   
+  N1 = invert_list(N1);
+  N2 = invert_list(N2);
+
   Node* n1 = N1->front; 
   Node* n2 = N2->front; 
 
@@ -144,19 +164,27 @@ List* soma(List* N1, List* N2){
 }
 
 
-//------------Funcao Main------------------------------
+//-------Funcao Main------------------------------
 
 int main(){
   List* N1 = create_list();
   List* N2 = create_list();
+
   char inp[10];
 
   int i = 0;
-  while(inp[i]!=' '){
-    scanf("%c", &inp[i]);
+  char c = 'u';
+  while(c!=' '){
+    scanf("%c", &c);
+    if (c == ' ')  
+        break;
+    inp[i] = c;
+    i++;
   }
 
-  char c = 'u';
+  printf("A soma eh %s\n", inp);
+
+  c = 'u';
   while(c != ' '){
     scanf("%c", &c);
     if (c == ' ')  
@@ -164,7 +192,7 @@ int main(){
     add_node(N1, c - '0');
   }
 
-   c = 'u';
+  c = 'u';
   while(c != '\n'){
     scanf("%c", &c);
     if (c == '\n')  
@@ -172,20 +200,17 @@ int main(){
     add_node(N2, c - '0');
   }
   
-  N1 = invert_list(N1);
-  N2 = invert_list(N2);
-
 
   printf("O Primeiro Numero eh: ");
   display_list_reverse(N1);
-  printf("\n");
+
   printf("O Segundo Numero eh: ");
   display_list_reverse(N2);
 
-  printf("\n");
-  printf("A soma dos numeros eh: ");
-  display_list_reverse(soma(N1, N2));
-
+  if (strcmp(inp, "soma") == 0){
+    printf("A soma dos numeros eh: ");
+    display_list_reverse(soma(N1, N2));
+  }
   return 0;
 }
 
