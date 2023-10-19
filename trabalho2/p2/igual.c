@@ -114,57 +114,6 @@ List* invert_list(List* N1) {
 
 //-------Problemas -------------------------------
 
-
-//++++++++++++++Soma +++++++++++++
-List* soma(List* N1, List* N2){
-  List* Nf = create_list();
-  
-  N1 = invert_list(N1);
-  N2 = invert_list(N2);
-
-  Node* n1 = N1->front; 
-  Node* n2 = N2->front; 
-
-  int extra = 0;
-  
-  while (n1 || n2){
-    
-    if (n1 && n2){
-      int final = n1->data + n2->data + extra;
-      int digit = 0;
-      if (final >= 10){
-        digit = final % 10;
-        extra = 1;
-      }else{
-        digit = final;
-        extra = 0;
-      }
-      add_node(Nf, digit);
-      n1 = n1->next;
-      n2 = n2->next;
-    }
-    else if (n1){  
-      int final = n1->data + extra;  
-      extra = 0;
-      add_node(Nf, final);
-      n1 = n1->next;
-    }
-    else if (n2){  
-      int final = n2->data + extra;  
-      extra = 0;
-      add_node(Nf, final);
-      n2 = n2->next;
-      }
-    }
-    if (!N1->front->next && !N1->front->next)
-      add_node(Nf, extra);
-
-  
-  return Nf;
-}
-
-
-//++++++++++++++Igual +++++++++++++
 void igual(List* N1, List* N2){
   List* Nf = create_list();
   
@@ -190,6 +139,7 @@ void igual(List* N1, List* N2){
       printf("Verdadeiro\n");
   }
 }
+
 //-------Funcao Main------------------------------
 
 int main(){
@@ -232,10 +182,6 @@ int main(){
   printf("O Segundo Numero eh: ");
   display_list_reverse(N2);
 
-  if (strcmp(inp, "soma") == 0){
-    printf("A soma dos numeros eh: ");
-    display_list_reverse(soma(N1, N2));
-  }
   if (strcmp(inp, "igual") == 0){
     igual(N1, N2);
   }
