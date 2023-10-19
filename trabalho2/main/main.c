@@ -48,11 +48,9 @@ void add_node(List* L, int value){
 
 void display_element(List* L){
   Node* current = L->front; 
-  int i = 0;
   while (current){
     printf("%d", current->data);
     current = current->next;
-    i++;
   }
 }
 
