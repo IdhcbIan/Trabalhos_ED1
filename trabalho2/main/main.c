@@ -116,14 +116,6 @@ int size(List* N1){
   }
 }
 
-int size_node(Node* n1){
-  int i = 0;
-
-  while (n1){
-    i++;
-    n1 = n1->next;
-  }
-}
 //-------Problemas -------------------------------
 
 
