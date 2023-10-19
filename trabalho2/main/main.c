@@ -118,6 +118,14 @@ int size(List* N1){
   }
 }
 
+int size_node(Node* n1){
+  int i = 0;
+
+  while (n1){
+    i++;
+    n1 = n1->next;
+  }
+}
 //-------Problemas -------------------------------
 
 
@@ -132,9 +140,9 @@ List* soma(List* N1, List* N2){
   Node* n2 = N2->front; 
 
   int extra = 0;
-  
+
   while (n1 || n2){
-    
+
     if (n1 && n2){
       int final = n1->data + n2->data + extra;
       int digit = 0;
