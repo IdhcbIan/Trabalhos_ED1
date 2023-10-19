@@ -108,6 +108,16 @@ List* invert_list(List* N1) {
     return N1;
 }
 
+int size(List* N1){
+  Node* n1 = N1->front;
+  int i = 0;
+
+  while (n1){
+    i++;
+    n1 = n1->next;
+  }
+}
+
 //-------Problemas -------------------------------
 
 
@@ -178,84 +188,102 @@ void igual(List* N1, List* N2){
       find = 1; 
     }
     else{
-      printf("Falso\n");
+      printf("False\n");
       break;
     }
   }
   if(find==1){
-      printf("Verdadeiro\n");
+      printf("True\n");
   }
 }
 
 
 //++++++++++++++Menor +++++++++++++
-List* menor(List* N1, List* N2){
+void menor(List* N1, List* N2){
   List* Nf = create_list();
   
   Node* n1 = N1->front; 
   Node* n2 = N2->front; 
 
-  
-  while (n1 || n2){
-    
-    if (n1 && n2){
-      if (n1->data>n2->data){
-        printf("False\n");
-        break;
-      }else if (n1->data<n2->data){
-        printf("True\n");
-        break;
-      }else{
-        n1 = n1->next;
-        n2 = n2->next;
-      }
+  while (n1->data==0 || n2->data==0){
+    if(n1->data==0){
+      N1->front = n1->next;
+      n1 = n1->next;
     }
-    else if (n1&&!n2){  
+    if(n2->data==0){
+      N2->front = n2->next;
+      n2 = n2->next;
+    }
+  }
+  n1 = N1->front; 
+  n2 = N2->front; 
+  
+  if (size(N1)>size(N2)){
+    printf("False");
+    n1 = NULL;
+    n2 = NULL;
+  }else if(size(N1)<size(N2)){
+    printf("True");
+    n1 = NULL;
+    n2 = NULL;
+  }
+
+  while (n1 && n2){
+    if (n1->data>n2->data){
       printf("False\n");
       break;
-    }
-    else if (n2&&!n1){  
+    }else if (n1->data<n2->data){
       printf("True\n");
       break;
-      }
+    }else{
+      n1 = n1->next;
+      n2 = n2->next;
     }
-
-  return Nf;
+  }
 }
 
 //++++++++++++++Maior +++++++++++++
-List* maior(List* N1, List* N2){
+void maior(List* N1, List* N2){
   List* Nf = create_list();
   
   Node* n1 = N1->front; 
   Node* n2 = N2->front; 
 
-  
-  while (n1 || n2){
-    
-    if (n1 && n2){
-      if (n1->data>n2->data){
-        printf("True\n");
-        break;
-      }else if (n1->data<n2->data){
-        printf("False\n");
-        break;
-      }else{
-        n1 = n1->next;
-        n2 = n2->next;
-      }
+  while (n1->data==0 || n2->data==0){
+    if(n1->data==0){
+      N1->front = n1->next;
+      n1 = n1->next;
     }
-    else if (n1&&!n2){  
+    if(n2->data==0){
+      N2->front = n2->next;
+      n2 = n2->next;
+    }
+  }
+  n1 = N1->front; 
+  n2 = N2->front; 
+  
+  if (size(N1)>size(N2)){
+    printf("True");
+    n1 = NULL;
+    n2 = NULL;
+  }else if(size(N1)<size(N2)){
+    printf("False");
+    n1 = NULL;
+    n2 = NULL;
+  }
+
+  while (n1 && n2){
+    if (n1->data>n2->data){
       printf("True\n");
       break;
-    }
-    else if (n2&&!n1){  
+    }else if (n1->data<n2->data){
       printf("False\n");
       break;
-      }
+    }else{
+      n1 = n1->next;
+      n2 = n2->next;
     }
-
-  return Nf;
+  }
 }
 
 //-------Funcao Main------------------------------
@@ -293,12 +321,14 @@ int main(){
     add_node(N2, c - '0');
   }
   
-
+  //Remember to comment ou this part!!
   printf("O Primeiro Numero eh: ");
-  display_list_reverse(N1);
+  display_element(N1);
+  printf("\n");
 
   printf("O Segundo Numero eh: ");
-  display_list_reverse(N2);
+  display_element(N2);
+  printf("\n");
 
   if (strcmp(inp, "soma") == 0){
     printf("A soma dos numeros eh: ");
