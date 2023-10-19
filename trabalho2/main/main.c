@@ -95,18 +95,14 @@ List* invert_list(List* N1) {
     Node* next = NULL;
 
     while (current != NULL) {
-        // Store the next node
         next = current->next;
 
-        // Reverse the current node's pointer
         current->next = prev;
 
-        // Move pointers for the next iteration
         prev = current;
         current = next;
     }
 
-    // Update the front of the list
     N1->front = prev;
 
     return N1;
@@ -190,6 +186,78 @@ void igual(List* N1, List* N2){
       printf("Verdadeiro\n");
   }
 }
+
+
+//++++++++++++++Menor +++++++++++++
+List* menor(List* N1, List* N2){
+  List* Nf = create_list();
+  
+  Node* n1 = N1->front; 
+  Node* n2 = N2->front; 
+
+  
+  while (n1 || n2){
+    
+    if (n1 && n2){
+      if (n1->data>n2->data){
+        printf("False\n");
+        break;
+      }else if (n1->data<n2->data){
+        printf("True\n");
+        break;
+      }else{
+        n1 = n1->next;
+        n2 = n2->next;
+      }
+    }
+    else if (n1&&!n2){  
+      printf("False\n");
+      break;
+    }
+    else if (n2&&!n1){  
+      printf("True\n");
+      break;
+      }
+    }
+
+  return Nf;
+}
+
+//++++++++++++++Maior +++++++++++++
+List* maior(List* N1, List* N2){
+  List* Nf = create_list();
+  
+  Node* n1 = N1->front; 
+  Node* n2 = N2->front; 
+
+  
+  while (n1 || n2){
+    
+    if (n1 && n2){
+      if (n1->data>n2->data){
+        printf("True\n");
+        break;
+      }else if (n1->data<n2->data){
+        printf("False\n");
+        break;
+      }else{
+        n1 = n1->next;
+        n2 = n2->next;
+      }
+    }
+    else if (n1&&!n2){  
+      printf("True\n");
+      break;
+    }
+    else if (n2&&!n1){  
+      printf("False\n");
+      break;
+      }
+    }
+
+  return Nf;
+}
+
 //-------Funcao Main------------------------------
 
 int main(){
@@ -238,6 +306,12 @@ int main(){
   }
   if (strcmp(inp, "igual") == 0){
     igual(N1, N2);
+  }
+  if (strcmp(inp, "maior") == 0){
+    maior(N1, N2);
+  }
+  if (strcmp(inp, "menor") == 0){
+    menor(N1, N2);
   }
   return 0;
 }
