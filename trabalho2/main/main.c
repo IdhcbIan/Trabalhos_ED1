@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h> 
+#include <string.h>
 
 //-------Definindo Estruturas -------------------------------
 
@@ -12,7 +12,7 @@ typedef struct Node{
 
 
 typedef struct List{
-  Node* front;  
+  Node* front;
 
 }List;
 
@@ -27,7 +27,7 @@ Node* create_node(int value){
 
 List* create_list(){
   List* L = malloc(sizeof(List));
-  
+
   return L;
 }
 
@@ -35,7 +35,7 @@ List* create_list(){
 
 void add_node(List* L, int value){
   if (L->front){
-    Node* current = L->front; 
+    Node* current = L->front;
     while (current->next){
       current = current->next;
     }
@@ -47,38 +47,31 @@ void add_node(List* L, int value){
 }
 
 void display_element(List* L){
-  Node* current = L->front; 
+  Node* current = L->front;
   while (current){
     printf("%d", current->data);
     current = current->next;
   }
 }
 
-void add_linear(char num[], List* L) {  
+void add_linear(char num[], List* L) {
     int length = strlen(num);
 
     for(int i = 0; i < length; i++) {
-        char c = num[i];  
-        add_node(L, c - '0'); 
+        char c = num[i];
+        add_node(L, c - '0');
     }
 }
 
-void add_reverse(List* L, char num[]) {  
-    int length = strlen(num);
 
-    for(int i = length - 1; i >= 0; i--) {  
-        char c = num[i];  
-        add_node(L, c - '0'); 
-    }
-}
 
 void display_element_reverse(Node* current) {
     if (current == NULL) {
-        return;  
+        return;
     }
-    
+
     display_element_reverse(current->next);
-    
+
     printf("%d", current->data);
 }
 
@@ -122,12 +115,12 @@ int size(List* N1){
 //++++++++++++++Soma +++++++++++++
 List* soma(List* N1, List* N2){
   List* Nf = create_list();
-  
+
   N1 = invert_list(N1);
   N2 = invert_list(N2);
 
-  Node* n1 = N1->front; 
-  Node* n2 = N2->front; 
+  Node* n1 = N1->front;
+  Node* n2 = N2->front;
 
   int extra = 0;
 
@@ -147,14 +140,14 @@ List* soma(List* N1, List* N2){
       n1 = n1->next;
       n2 = n2->next;
     }
-    else if (n1){  
-      int final = n1->data + extra;  
+    else if (n1){
+      int final = n1->data + extra;
       extra = 0;
       add_node(Nf, final);
       n1 = n1->next;
     }
-    else if (n2){  
-      int final = n2->data + extra;  
+    else if (n2){
+      int final = n2->data + extra;
       extra = 0;
       add_node(Nf, final);
       n2 = n2->next;
@@ -163,7 +156,7 @@ List* soma(List* N1, List* N2){
     if (!N1->front->next && !N1->front->next)
       add_node(Nf, extra);
 
-  
+
   return Nf;
 }
 
@@ -171,19 +164,33 @@ List* soma(List* N1, List* N2){
 //++++++++++++++Igual +++++++++++++
 void igual(List* N1, List* N2){
   List* Nf = create_list();
-  
+  Node* n1 = N1->front;
+  Node* n2 = N2->front;
+
+  while (n1->data==0 || n2->data==0){
+    if(n1->data==0){
+      N1->front = n1->next;
+      n1 = n1->next;
+    }
+    if(n2->data==0){
+      N2->front = n2->next;
+      n2 = n2->next;
+    }
+  }
+  n1 = N1->front;
+  n2 = N2->front;
+
   N1 = invert_list(N1);
   N2 = invert_list(N2);
 
-  Node* n1 = N1->front; 
-  Node* n2 = N2->front; 
 
-  int find = 0; 
+
+  int find = 0;
   while (n1 || n2){
     if (n1->data = n2->data){
       n1 = n1->next;
       n2 = n2->next;
-      find = 1; 
+      find = 1;
     }
     else{
       printf("False\n");
@@ -196,12 +203,15 @@ void igual(List* N1, List* N2){
 }
 
 
+
+
+
 //++++++++++++++Menor +++++++++++++
 void menor(List* N1, List* N2){
   List* Nf = create_list();
-  
-  Node* n1 = N1->front; 
-  Node* n2 = N2->front; 
+
+  Node* n1 = N1->front;
+  Node* n2 = N2->front;
 
   while (n1->data==0 || n2->data==0){
     if(n1->data==0){
@@ -213,9 +223,9 @@ void menor(List* N1, List* N2){
       n2 = n2->next;
     }
   }
-  n1 = N1->front; 
-  n2 = N2->front; 
-  
+  n1 = N1->front;
+  n2 = N2->front;
+
   if (size(N1)>size(N2)){
     printf("False");
     n1 = NULL;
@@ -243,9 +253,9 @@ void menor(List* N1, List* N2){
 //++++++++++++++Maior +++++++++++++
 void maior(List* N1, List* N2){
   List* Nf = create_list();
-  
-  Node* n1 = N1->front; 
-  Node* n2 = N2->front; 
+
+  Node* n1 = N1->front;
+  Node* n2 = N2->front;
 
   while (n1->data==0 || n2->data==0){
     if(n1->data==0){
@@ -257,9 +267,9 @@ void maior(List* N1, List* N2){
       n2 = n2->next;
     }
   }
-  n1 = N1->front; 
-  n2 = N2->front; 
-  
+  n1 = N1->front;
+  n2 = N2->front;
+
   if (size(N1)>size(N2)){
     printf("True");
     n1 = NULL;
@@ -296,7 +306,7 @@ int main(){
   char c = 'u';
   while(c!=' '){
     scanf("%c", &c);
-    if (c == ' ')  
+    if (c == ' ')
         break;
     inp[i] = c;
     i++;
@@ -306,7 +316,7 @@ int main(){
   c = 'u';
   while(c != ' '){
     scanf("%c", &c);
-    if (c == ' ')  
+    if (c == ' ')
         break;
     add_node(N1, c - '0');
   }
@@ -314,11 +324,11 @@ int main(){
   c = 'u';
   while(c != '\n'){
     scanf("%c", &c);
-    if (c == '\n')  
+    if (c == '\n')
         break;
     add_node(N2, c - '0');
   }
-  
+
   //Remember to comment ou this part!!
   printf("O Primeiro Numero eh: ");
   display_element(N1);
