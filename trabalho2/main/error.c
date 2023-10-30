@@ -112,15 +112,14 @@ List* invert_list(List* N1) {
     return N1;
 }
 
-int size(List* N1) {
-    Node* n1 = N1->front;
-    int i = 0;
+int size(List* N1){
+  Node* n1 = N1->front;
+  int i = 0;
 
-    while (n1) {
-        i++;
-        n1 = n1->next;
-    }
-    return i;               // Return the size
+  while (n1){
+    i++;
+    n1 = n1->next;
+  }
 }
 
 void free_list(List* L){
@@ -135,112 +134,6 @@ void free_list(List* L){
   free(L);
 }
 //-------Problemas -------------------------------
-
-
-//++++++++++++++Soma +++++++++++++
-List* soma(List* N1, List* N2){
-  List* Nf = create_list();
-
-
-
-
-  N1 = invert_list(N1);
-  N2 = invert_list(N2);
-
-  Node* n1 = N1->front;
-  Node* n2 = N2->front;
-  
-
-  int extra = 0;
-
-  while (n1 || n2){
-
-    if (n1 && n2){
-      int final = n1->data + n2->data + extra;
-      int digit = 0;
-      if (final >= 10){
-        digit = final % 10;
-        extra = 1;
-      }else{
-        digit = final;
-        extra = 0;
-      }
-      add_node(Nf, digit);
-      n1 = n1->next;
-      n2 = n2->next;
-    }
-    else if (n1){
-      int final = n1->data + extra;
-      extra = 0;
-      add_node(Nf, final);
-      n1 = n1->next;
-    }
-    else if (n2){
-      int final = n2->data + extra;
-      extra = 0;
-      add_node(Nf, final);
-      n2 = n2->next;
-      }
-    }
-    if (!N1->front->next && !N1->front->next)
-      add_node(Nf, extra);
-
-
-  Nf = invert_list(Nf);
-  Node* nf = Nf->front;
-  while (nf->data==0){
-      Nf->front = nf->next;
-      free(nf);
-      nf = Nf->front;
-  }
-
-  return Nf;
-}
-
-
-//++++++++++++++Igual +++++++++++++
-void igual(List* N1, List* N2){
-  List* Nf = create_list();
-  Node* n1 = N1->front;
-  Node* n2 = N2->front;
-
-  while (n1->data==0 || n2->data==0){
-    if(n1->data==0){
-      N1->front = n1->next;
-      free(n1);
-      n1 = N1->front;
-    }
-    if(n2->data==0){
-      N2->front = n2->next;
-      free(n2);
-      n2 = N2->front;
-    }
-  }
-  n1 = N1->front;
-  n2 = N2->front;
-
-
-
-
-  int find = 0;
-  while (n1 || n2){
-    if (n1->data = n2->data){
-      n1 = n1->next;
-      n2 = n2->next;
-      find = 1;
-    }
-    else{
-      printf("False\n");
-      break;
-    }
-  }
-  if(find==1){
-      printf("True\n");
-  }
-}
-
-
-
 
 
 //++++++++++++++Menor +++++++++++++
