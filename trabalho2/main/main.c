@@ -219,18 +219,20 @@ void igual(List* N1, List* N2){
   n1 = N1->front;
   n2 = N2->front;
 
-
-
+  if (size(N1)!=size(N2)){
+    printf("False");
+    return;
+  }
 
   int find = 0;
-  while (n1 || n2){
+  while (n1 && n2){
     if (n1->data = n2->data){
       n1 = n1->next;
       n2 = n2->next;
       find = 1;
-    }
-    else{
+    }else{
       printf("False\n");
+      find = 0;
       break;
     }
   }
