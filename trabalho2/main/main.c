@@ -19,6 +19,11 @@ typedef struct List{
 
 Node* create_node(int value){
   Node* newNode = malloc(sizeof(Node));
+  if (!newNode) {
+    perror("Failed to allocate memory for node");
+    exit(EXIT_FAILURE);
+  }
+  
   newNode->data = value;
   newNode->next = NULL;
 
@@ -27,21 +32,29 @@ Node* create_node(int value){
 
 List* create_list(){
   List* L = malloc(sizeof(List));
+  if (!L) {
+    perror("Failed to allocate memory for list");
+    exit(EXIT_FAILURE);
+  }
+  L->front = NULL;
 
   return L;
 }
+
 
 //-------Definindo Funcoes -------------------------------
 
 void add_node(List* L, int value){
   if (L->front){
+         //percorremos, com o ponteiro "current", toda a lista, até que aponte para o ultimo elemento
     Node* current = L->front;
     while (current->next){
       current = current->next;
     }
-    Node* new = create_node(value);
+    Node* new = create_node(value);//adicionamos um novo nó como ultimo elemento
     current->next = new;
   }else{
+ //caso a lista esteja vazia, apenas adicionamos um novo nó e setamos o ponteiro
   L->front = create_node(value);
   }
 }
@@ -109,6 +122,17 @@ int size(List* N1){
   }
 }
 
+void free_list(List* L){
+  Node* current = L->front;
+  Node* next;
+  
+  while(current){
+    next = current->next;
+    free(current);
+    current = next;
+  }
+  free(L);
+}
 //-------Problemas -------------------------------
 
 
@@ -116,11 +140,15 @@ int size(List* N1){
 List* soma(List* N1, List* N2){
   List* Nf = create_list();
 
+
+
+
   N1 = invert_list(N1);
   N2 = invert_list(N2);
 
   Node* n1 = N1->front;
   Node* n2 = N2->front;
+  
 
   int extra = 0;
 
@@ -157,6 +185,14 @@ List* soma(List* N1, List* N2){
       add_node(Nf, extra);
 
 
+  Nf = invert_list(Nf);
+  Node* nf = Nf->front;
+  while (nf->data==0){
+      Nf->front = nf->next;
+      free(nf);
+      nf = Nf->front;
+  }
+
   return Nf;
 }
 
@@ -170,18 +206,18 @@ void igual(List* N1, List* N2){
   while (n1->data==0 || n2->data==0){
     if(n1->data==0){
       N1->front = n1->next;
-      n1 = n1->next;
+      free(n1);
+      n1 = N1->front;
     }
     if(n2->data==0){
       N2->front = n2->next;
-      n2 = n2->next;
+      free(n2);
+      n2 = N2->front;
     }
   }
   n1 = N1->front;
   n2 = N2->front;
 
-  N1 = invert_list(N1);
-  N2 = invert_list(N2);
 
 
 
@@ -216,11 +252,13 @@ void menor(List* N1, List* N2){
   while (n1->data==0 || n2->data==0){
     if(n1->data==0){
       N1->front = n1->next;
-      n1 = n1->next;
+      free(n1);
+      n1 = N1->front;
     }
     if(n2->data==0){
       N2->front = n2->next;
-      n2 = n2->next;
+      free(n2);
+      n2 = N2->front;
     }
   }
   n1 = N1->front;
@@ -260,11 +298,13 @@ void maior(List* N1, List* N2){
   while (n1->data==0 || n2->data==0){
     if(n1->data==0){
       N1->front = n1->next;
-      n1 = n1->next;
+      free(n1);
+      n1 = N1->front;
     }
     if(n2->data==0){
       N2->front = n2->next;
-      n2 = n2->next;
+      free(n2);
+      n2 = N2->front;
     }
   }
   n1 = N1->front;
@@ -330,26 +370,33 @@ int main(){
   }
 
   //Remember to comment ou this part!!
-  printf("O Primeiro Numero eh: ");
-  display_element(N1);
-  printf("\n");
+  //printf("O Primeiro Numero eh: ");
+  //display_element(N1);
+  //printf("\n");
 
-  printf("O Segundo Numero eh: ");
-  display_element(N2);
-  printf("\n");
+  //printf("O Segundo Numero eh: ");
+  //display_element(N2);
+  //printf("\n");
 
   if (strcmp(inp, "soma") == 0){
-    printf("A soma dos numeros eh: ");
-    display_list_reverse(soma(N1, N2));
-  }
-  if (strcmp(inp, "igual") == 0){
+    //printf("A soma dos numeros eh: ");
+    List* Nf = soma(N1, N2);
+    display_element(Nf);
+    free_list(Nf);
+    free_list(N1);
+    free_list(N2);
+  }else if (strcmp(inp, "igual") == 0){
     igual(N1, N2);
-  }
-  if (strcmp(inp, "maior") == 0){
+    free_list(N1);
+    free_list(N2);
+  }else if (strcmp(inp, "maior") == 0){
     maior(N1, N2);
-  }
-  if (strcmp(inp, "menor") == 0){
+    free_list(N1);
+    free_list(N2);
+  }else if (strcmp(inp, "menor") == 0){
     menor(N1, N2);
+    free_list(N1);
+    free_list(N2);
   }
   return 0;
 }
