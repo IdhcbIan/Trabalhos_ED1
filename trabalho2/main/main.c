@@ -67,16 +67,17 @@ void display_element(List* L){
   }
 }
 
-void add_linear(char num[], List* L) {
-    int length = strlen(num);
+void tirar_zeros(List* N){
+  Node* n = N->front;
 
-    for(int i = 0; i < length; i++) {
-        char c = num[i];
-        add_node(L, c - '0');
+  while (n->data==0){
+    if(n->data==0){
+      N->front = n->next;
+      free(n);
+      n = N->front;
     }
+  }
 }
-
-
 
 void display_element_reverse(Node* current) {
     if (current == NULL) {
@@ -88,10 +89,6 @@ void display_element_reverse(Node* current) {
     printf("%d", current->data);
 }
 
-void display_list_reverse(List* L) {
-    display_element_reverse(L->front);
-    printf("\n");
-}
 
 List* invert_list(List* N1) {
     Node* prev = NULL;
@@ -134,6 +131,7 @@ void free_list(List* L){
   }
   free(L);
 }
+
 //-------Problemas -------------------------------
 
 
@@ -141,15 +139,11 @@ void free_list(List* L){
 List* soma(List* N1, List* N2){
   List* Nf = create_list();
 
-
-
-
   N1 = invert_list(N1);
   N2 = invert_list(N2);
 
   Node* n1 = N1->front;
   Node* n2 = N2->front;
-  
 
   int extra = 0;
 
@@ -182,17 +176,13 @@ List* soma(List* N1, List* N2){
       n2 = n2->next;
       }
     }
-    if (!N1->front->next && !N1->front->next)
+    if (!N1->front->next && !N2->front->next)
       add_node(Nf, extra);
 
 
   Nf = invert_list(Nf);
-  Node* nf = Nf->front;
-  while (nf->data==0){
-      Nf->front = nf->next;
-      free(nf);
-      nf = Nf->front;
-  }
+
+  tirar_zeros(Nf);
 
   return Nf;
 }
@@ -201,23 +191,12 @@ List* soma(List* N1, List* N2){
 //++++++++++++++Igual +++++++++++++
 void igual(List* N1, List* N2){
   List* Nf = create_list();
+
+  tirar_zeros(N1);
+  tirar_zeros(N2);
+
   Node* n1 = N1->front;
   Node* n2 = N2->front;
-
-  while (n1->data==0 || n2->data==0){
-    if(n1->data==0){
-      N1->front = n1->next;
-      free(n1);
-      n1 = N1->front;
-    }
-    if(n2->data==0){
-      N2->front = n2->next;
-      free(n2);
-      n2 = N2->front;
-    }
-  }
-  n1 = N1->front;
-  n2 = N2->front;
 
   if (size(N1)!=size(N2)){
     printf("False");
@@ -226,7 +205,7 @@ void igual(List* N1, List* N2){
 
   int find = 0;
   while (n1 && n2){
-    if (n1->data = n2->data){
+    if (n1->data == n2->data){
       n1 = n1->next;
       n2 = n2->next;
       find = 1;
@@ -249,23 +228,11 @@ void igual(List* N1, List* N2){
 void menor(List* N1, List* N2){
   List* Nf = create_list();
 
+  tirar_zeros(N1);
+  tirar_zeros(N2);
+
   Node* n1 = N1->front;
   Node* n2 = N2->front;
-
-  while (n1->data==0 || n2->data==0){
-    if(n1->data==0){
-      N1->front = n1->next;
-      free(n1);
-      n1 = N1->front;
-    }
-    if(n2->data==0){
-      N2->front = n2->next;
-      free(n2);
-      n2 = N2->front;
-    }
-  }
-  n1 = N1->front;
-  n2 = N2->front;
 
   if (size(N1)>size(N2)){
     printf("False");
@@ -277,41 +244,36 @@ void menor(List* N1, List* N2){
     n2 = NULL;
   }
 
+  int check = 0;
   while (n1 && n2){
     if (n1->data>n2->data){
       printf("False\n");
+      check = 1;
       break;
     }else if (n1->data<n2->data){
       printf("True\n");
+      check = 1;
       break;
     }else{
       n1 = n1->next;
       n2 = n2->next;
     }
   }
+  if (check == 0){
+    printf("False\n");
+  }
 }
+
 
 //++++++++++++++Maior +++++++++++++
 void maior(List* N1, List* N2){
   List* Nf = create_list();
 
+  tirar_zeros(N1);
+  tirar_zeros(N2);
+
   Node* n1 = N1->front;
   Node* n2 = N2->front;
-
-  while (n1->data==0 || n2->data==0){
-    if(n1->data==0){
-      N1->front = n1->next;
-      free(n1);
-      n1 = N1->front;
-    }
-    if(n2->data==0){
-      N2->front = n2->next;
-      free(n2);
-      n2 = N2->front;
-    }
-  }
-  n1 = N1->front;
-  n2 = N2->front;
 
   if (size(N1)>size(N2)){
     printf("True");
@@ -322,18 +284,24 @@ void maior(List* N1, List* N2){
     n1 = NULL;
     n2 = NULL;
   }
-
+  
+  int check = 0;
   while (n1 && n2){
     if (n1->data>n2->data){
       printf("True\n");
+      check = 1;
       break;
     }else if (n1->data<n2->data){
       printf("False\n");
+      check = 1;
       break;
     }else{
       n1 = n1->next;
       n2 = n2->next;
     }
+  }
+  if (check == 0){
+    printf("False\n");
   }
 }
 
@@ -365,11 +333,10 @@ int main(){
   }
 
   c = 'u';
-  while(c != '\n'){
-    scanf("%c", &c);
-    if (c == '\n')
-        break;
-    add_node(N2, c - '0');
+  while(scanf("%c", &c) != EOF) {
+      if (c == '\n')
+          break;
+      add_node(N2, c - '0');
   }
 
   //Remember to comment ou this part!!
