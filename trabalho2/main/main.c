@@ -67,7 +67,7 @@ void display_element(List* L){
   }
 }
 
-void tirar_zeros(List* N){
+void remove_zero(List* N){
   Node* n = N->front;
 
   while (n->data==0){
@@ -117,7 +117,7 @@ int size(List* N1) {
         i++;
         n1 = n1->next;
     }
-    return i;               // Return the size
+      return i;               
 }
 
 void free_list(List* L){
@@ -182,7 +182,7 @@ List* soma(List* N1, List* N2){
 
   Nf = invert_list(Nf);
 
-  tirar_zeros(Nf);
+  remove_zero(Nf);
 
   return Nf;
 }
@@ -190,10 +190,9 @@ List* soma(List* N1, List* N2){
 
 //++++++++++++++Igual +++++++++++++
 void igual(List* N1, List* N2){
-  List* Nf = create_list();
 
-  tirar_zeros(N1);
-  tirar_zeros(N2);
+  remove_zero(N1);
+  remove_zero(N2);
 
   Node* n1 = N1->front;
   Node* n2 = N2->front;
@@ -226,10 +225,9 @@ void igual(List* N1, List* N2){
 
 //++++++++++++++Menor +++++++++++++
 void menor(List* N1, List* N2){
-  List* Nf = create_list();
 
-  tirar_zeros(N1);
-  tirar_zeros(N2);
+  remove_zero(N1);
+  remove_zero(N2);
 
   Node* n1 = N1->front;
   Node* n2 = N2->front;
@@ -267,10 +265,9 @@ void menor(List* N1, List* N2){
 
 //++++++++++++++Maior +++++++++++++
 void maior(List* N1, List* N2){
-  List* Nf = create_list();
-
-  tirar_zeros(N1);
-  tirar_zeros(N2);
+ 
+  remove_zero(N1);
+  remove_zero(N2);
 
   Node* n1 = N1->front;
   Node* n2 = N2->front;
@@ -323,7 +320,6 @@ int main(){
     i++;
   }
 
-
   c = 'u';
   while(c != ' '){
     scanf("%c", &c);
@@ -339,15 +335,6 @@ int main(){
       add_node(N2, c - '0');
   }
 
-  //Remember to comment ou this part!!
-  //printf("O Primeiro Numero eh: ");
-  //display_element(N1);
-  //printf("\n");
-
-  //printf("O Segundo Numero eh: ");
-  //display_element(N2);
-  //printf("\n");
-
   if (strcmp(inp, "soma") == 0){
     //printf("A soma dos numeros eh: ");
     List* Nf = soma(N1, N2);
@@ -355,14 +342,17 @@ int main(){
     free_list(Nf);
     free_list(N1);
     free_list(N2);
+
   }else if (strcmp(inp, "igual") == 0){
     igual(N1, N2);
     free_list(N1);
     free_list(N2);
+
   }else if (strcmp(inp, "maior") == 0){
     maior(N1, N2);
     free_list(N1);
     free_list(N2);
+
   }else if (strcmp(inp, "menor") == 0){
     menor(N1, N2);
     free_list(N1);
