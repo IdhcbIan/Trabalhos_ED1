@@ -190,14 +190,14 @@ void print_node(Node* groot){
 }
 
 //++++  Imprime a lista em ordem +++++++++++++++++++++++++
-void inOrder(Node* groot){
+void preOrder(Node* groot){
   if (groot==NULL){
     return;
   }
 
-  inOrder(groot->Lef);
   print_node(groot);
-  inOrder(groot->Rig);
+  preOrder(groot->Lef);
+  preOrder(groot->Rig);
   
 }
 //++++  Insere nos recursivamente em seu lugar +++++++++++++++++++++++++
@@ -258,8 +258,7 @@ int main() {
 
     for(int i=0;i<times;i++){
       if (i==0){
-        add = input();
-        groot = insert(groot, add);
+        groot = input();
         Tree* T = newTree(groot); 
         groot = T->root;
 
@@ -280,8 +279,10 @@ int main() {
     } else if (operation == 'I'){
         add = input();
         groot = insert(groot, add);
-        inOrder(groot);
+        preOrder(groot);
     } 
+    //printTree(groot);
+    printf("%s\n", groot->numbers);
 
     return 0;
 }

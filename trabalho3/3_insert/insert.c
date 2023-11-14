@@ -148,6 +148,7 @@ int main() {
     Node* groot = T->root;
 
     groot = insert(groot, input());
+    groot = insert(groot, input());
 
     //printf("%s\n",N1->name);
     printTree(groot);
