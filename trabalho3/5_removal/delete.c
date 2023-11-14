@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-//----------- Structures -------------------------------------
+//------------------// Criando estruturas //------------------------------------------------------------------------
 
+//++++  No +++++++++++++++++++++++++
 typedef struct Node{
-  
   char numbers[16];
   char name[30];
   char age[3];
@@ -13,25 +13,26 @@ typedef struct Node{
   struct Node* Rig;
   struct Node* Lef;
 
-
 }Node;
 
 
+//++++  arvore +++++++++++++++++++++++++
 typedef struct Tree{
   struct Node* root;
 
 }Tree;
 
 
-//------------------------------------------------
+//------------------// Funcoes elementares //------------------------------------------------------------------------
+
+//++++  Criando um no +++++++++++++++++++++++++
 Node* newNode(char numbers[16], char name[30], char age[3], char balance[30]){
     Node* temp = (Node*)malloc(sizeof(Node));
     if (temp == NULL) {
-        // Handle memory allocation failure
         return NULL;
     }
   
-    temp->numbers[0] = '\0';  // Initialize to empty string
+    temp->numbers[0] = '\0';
     temp->name[0] = '\0';
     temp->age[0] = '\0';
     temp->balance[0] = '\0';
@@ -47,6 +48,7 @@ Node* newNode(char numbers[16], char name[30], char age[3], char balance[30]){
     return temp;
 }
 
+//++++  Criando uma arvore +++++++++++++++++++++++++
 Tree* newTree(Node* root){
   Tree* bonsai = (Tree*)malloc(sizeof(Tree));
   bonsai->root = root;
@@ -54,7 +56,10 @@ Tree* newTree(Node* root){
 
   return bonsai;
 }
-//------------------------------------------------
+//------------------// Funcoes //------------------------------------------------------------------------
+
+
+//++++  Recolhe uma linha +++++++++++++++++++++++++
 char* line() {
     char input[100];
     char *numbers;
@@ -83,6 +88,7 @@ char* line() {
     return numbers;
 }
 
+//++++  Recolhe input +++++++++++++++++++++++++
 Node* input() {
     char input[100];
     char numbers[16] = {0}; 
@@ -137,14 +143,30 @@ Node* input() {
     return newNode(numbers, name, age, balance);
 }
 
-//------------------------------------------------
+
+//++++  Busca um no +++++++++++++++++++++++++
+Node* busca(Node* groot, char num[16]){
+  
+  if (strcmp(num, groot->numbers) == 0){
+    return groot;
+  } 
+
+  if (strcmp(num, groot->numbers) > 0){
+    return busca(groot->Rig, num);
+  } else if (strcmp(num, groot->numbers) < 0){
+    return busca(groot->Lef, num);
+  }
+
+}
+
+
+//++++  Imprime Nos formatand-os +++++++++++++++++++++++++
 void print_node(Node* groot){
     if (groot == NULL) {
         printf("Node is NULL\n");
         return;
     }
 
-    // Print formatted numbers
     for (int i = 0; i < 3; i++) {
         printf("%c", groot->numbers[i]);
     }
@@ -167,7 +189,18 @@ void print_node(Node* groot){
     printf("%s\n", groot->balance);
 }
 
+//++++  Imprime a lista em ordem +++++++++++++++++++++++++
+void inOrder(Node* groot){
+  if (groot==NULL){
+    return;
+  }
 
+  inOrder(groot->Lef);
+  print_node(groot);
+  inOrder(groot->Rig);
+  
+}
+//++++  Insere nos recursivamente em seu lugar +++++++++++++++++++++++++
 Node* insert(Node* groot, Node* add){
   if(groot == NULL){
     return add;
@@ -183,7 +216,7 @@ Node* insert(Node* groot, Node* add){
   return groot;
 }
 
-//----- Utility Functions -----
+//------------------// Provisorio //------------------------------------------------------------------------
 
 void printTreeUtil(Node* root, int space, int depth) {
     // Base case
@@ -212,35 +245,9 @@ void printTree(Node* root) {
     printTreeUtil(root, 0, 10);  // depth can be adjusted for the width of the tree
 }
 
-//------------------------------------------------
-
-Node* busca(Node* groot, char num[16]){
-  
-  if (strcmp(num, groot->numbers) == 0){
-    return groot;
-  } 
-
-  if (strcmp(num, groot->numbers) > 0){
-    return busca(groot->Rig, num);
-  } else if (strcmp(num, groot->numbers) < 0){
-    return busca(groot->Lef, num);
-  }
-
-}
 
 
-void inOrder(Node* groot){
-  if (groot==NULL){
-    return;
-  }
-
-  inOrder(groot->Lef);
-  print_node(groot);
-  inOrder(groot->Rig);
-  
-}
-
-//------------------------------------------------
+//------------------// Funcao Main //------------------------------------------------------------------------
 
 int main() {
   
