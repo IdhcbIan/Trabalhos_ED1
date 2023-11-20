@@ -200,6 +200,18 @@ void preOrder(Node* groot){
   preOrder(groot->Rig);
   
 }
+
+
+void inOrder(Node* groot){
+  if (groot==NULL){
+    return;
+  }
+
+  inOrder(groot->Lef);
+  print_node(groot);
+  inOrder(groot->Rig);
+  
+}
 //++++  Insere nos recursivamente em seu lugar +++++++++++++++++++++++++
 Node* insert(Node* groot, Node* add){
   if(groot == NULL){
@@ -216,6 +228,46 @@ Node* insert(Node* groot, Node* add){
   return groot;
 }
 
+//++++ Remocao +++++++++++++++++++++++++
+Node* findPred(Node* groot) {
+    Node* current = groot->Lef;
+    while (current && current->Rig != NULL)
+        current = current->Rig;
+    return current;
+}
+
+// remove
+Node* remove_node(Node* groot, char num[16]) {
+    if (groot == NULL)
+        return groot;
+
+    if (strcmp(num, groot->numbers) < 0)
+        groot->Lef = remove_node(groot->Lef, num);
+    else if (strcmp(num, groot->numbers) > 0)
+        groot->Rig = remove_node(groot->Rig, num);
+    else {
+      // Uma crianca
+        if (groot->Lef == NULL) {
+            Node* temp = groot->Rig;
+            free(groot);
+            return temp;
+        }
+        else if (groot->Rig == NULL) {
+            Node* temp = groot->Lef;
+            free(groot);
+            return temp;
+        }
+
+      // duas criancas
+        Node* temp = findPred(groot);
+        strcpy(groot->numbers, temp->numbers);
+        strcpy(groot->name, temp->name);
+        strcpy(groot->age, temp->age);
+        strcpy(groot->balance, temp->balance);
+        groot->Lef = remove_node(groot->Lef, temp->numbers);
+    }
+    return groot;
+}
 //------------------// Provisorio //------------------------------------------------------------------------
 
 void printTreeUtil(Node* root, int space, int depth) {
@@ -258,7 +310,8 @@ int main() {
 
     for(int i=0;i<times;i++){
       if (i==0){
-        groot = input();
+        add = input();
+        groot = insert(groot, add);
         Tree* T = newTree(groot); 
         groot = T->root;
 
@@ -279,10 +332,11 @@ int main() {
     } else if (operation == 'I'){
         add = input();
         groot = insert(groot, add);
+        inOrder(groot);
+    } else if (operation == 'R'){
+        char *num = line();
+        groot = remove_node(groot, num);
         preOrder(groot);
-    } 
-    //printTree(groot);
-    printf("%s\n", groot->numbers);
-
+    }
     return 0;
 }
