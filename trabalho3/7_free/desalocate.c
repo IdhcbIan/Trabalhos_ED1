@@ -268,6 +268,18 @@ Node* remove_node(Node* groot, char num[16]) {
     }
     return groot;
 }
+
+
+// Desaloca
+void deleteTree(Node* groot) {
+    if (groot == NULL) {
+        return;
+    }
+    deleteTree(groot->Lef);
+    deleteTree(groot->Rig);
+
+    free(groot);
+}
 //------------------// Provisorio //------------------------------------------------------------------------
 
 void printTreeUtil(Node* root, int space, int depth) {
@@ -307,6 +319,7 @@ int main() {
     scanf("%d\n", &times);
     Node* groot = NULL;
     Node* add = NULL;
+    Tree* T = NULL;
 
     for(int i=0;i<times;i++){
       if (i==0){
@@ -332,11 +345,14 @@ int main() {
     } else if (operation == 'I'){
         add = input();
         groot = insert(groot, add);
-        inOrder(groot);
+        preOrder(groot);
     } else if (operation == 'R'){
         char *num = line();
         groot = remove_node(groot, num);
         preOrder(groot);
     }
+    
+    deleteTree(groot);
+    free(T);
     return 0;
 }
