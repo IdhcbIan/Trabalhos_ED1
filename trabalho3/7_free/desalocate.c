@@ -49,9 +49,12 @@ Node* newNode(char numbers[16], char name[30], char age[3], char balance[30]){
 }
 
 //++++  Criando uma arvore +++++++++++++++++++++++++
-Tree* newTree(Node* root){
+Tree* newTree(Node* groot){
   Tree* bonsai = (Tree*)malloc(sizeof(Tree));
-  bonsai->root = root;
+  if (bonsai == NULL) {
+      return NULL;
+  }
+  bonsai->root = groot;
 
 
   return bonsai;
