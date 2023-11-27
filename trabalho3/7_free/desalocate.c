@@ -147,9 +147,11 @@ Node* input() {
 //++++  Busca um no +++++++++++++++++++++++++
 Node* busca(Node* groot, char num[16]){
   
-  if (strcmp(num, groot->numbers) == 0){
+  if (groot == NULL){
     return groot;
-  } 
+  } else if (strcmp(num, groot->numbers) == 0){
+    return groot;
+  }
 
   if (strcmp(num, groot->numbers) > 0){
     return busca(groot->Rig, num);
@@ -163,7 +165,7 @@ Node* busca(Node* groot, char num[16]){
 //++++  Imprime Nos formatand-os +++++++++++++++++++++++++
 void print_node(Node* groot){
     if (groot == NULL) {
-        printf("Node is NULL\n");
+        printf("Pessoa nao encontrada\n");
         return;
     }
 
@@ -341,6 +343,8 @@ int main() {
     if (operation == 'B'){
       char *num = line();
       Node* find = busca(groot, num);
+      if (find==NULL){
+      }
       print_node(find);
     } else if (operation == 'I'){
         add = input();
